@@ -1,0 +1,68 @@
+# Local-first stack for the ALEF rebuild. Zero cost, no external accounts.
+# Datastores + Ollama can run before any app code exists:
+#   docker compose up -d postgres qdrant redis ollama   (or: make infra-up)
+# The web/api/worker services build once the Dev agent scaffolds them.
+
+services:
+  web:
+    build: ./web
+    ports: ["3000:3000"]
+    environment:
+      API_BASE_URL: http://api:8080
+    depends_on: [api]
+
+  api:
+    build: ./api
+    ports: ["8080:8080"]
+    environment:
+      SPRING_PROFILES_ACTIVE: api
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/alef
+      SPRING_DATASOURCE_USERNAME: alef
+      SPRING_DATASOURCE_PASSWORD: alef
+      SPRING_DATA_REDIS_HOST: redis
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: "6333"
+      SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
+      SPRING_AI_OLLAMA_CHAT_MODEL: llama3.2
+      SPRING_AI_OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+    depends_on: [postgres, qdrant, redis, ollama]
+
+  worker:
+    build: ./api
+    environment:
+      SPRING_PROFILES_ACTIVE: worker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/alef
+      SPRING_DATASOURCE_USERNAME: alef
+      SPRING_DATASOURCE_PASSWORD: alef
+      SPRING_DATA_REDIS_HOST: redis
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: "6333"
+      SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
+      SPRING_AI_OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+    depends_on: [postgres, qdrant, redis, ollama]
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: alef
+      POSTGRES_USER: alef
+      POSTGRES_PASSWORD: alef
+    ports: ["5432:5432"]
+    volumes:
+      - ./infra/pgdata:/var/lib/postgresql/data
+
+  qdrant:
+    image: qdrant/qdrant   # pin a version tag before any real use
+    ports: ["6333:6333"]
+    volumes:
+      - ./infra/qdrant_storage:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  ollama:
+    image: ollama/ollama
+    ports: ["11434:11434"]
+    volumes:
+      - ./infra/ollama_models:/root/.ollama

@@ -1,0 +1,21 @@
+# node
+node_modules/
+.next/
+out/
+# java
+target/
+*.class
+.gradle/
+build/
+# env + secrets
+.env
+.env.*
+!.env.example
+# data volumes
+**/qdrant_storage/
+**/pgdata/
+**/ollama_models/
+# os / editor
+.DS_Store
+.idea/
+*.iml
