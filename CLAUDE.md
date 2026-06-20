@@ -51,6 +51,7 @@ The specs are the source of truth, not this conversation and not the code. If re
 | 009 | WhatsApp Handoff | requirements approved |
 | 010 | Drawing-Aware RFQ (phase 2) | requirements draft, blocked on paid/private model |
 | 011 | Core Marketing Pages (Home/About/Services/Contact) | requirements approved |
+| 012 | Admin Content Management | requirements approved |
 
 Downstream phases (architecture, design, implementation, testing) are produced per feature by running /orchestrate.
 
