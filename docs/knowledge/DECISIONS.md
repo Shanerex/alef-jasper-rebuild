@@ -2,6 +2,36 @@
 
 > Append-only. Newest first. Why a choice was made, not just what.
 
+## DEC-012: Flyway migration plus idempotent SQL seed for project data (2026-06-22)
+- Context: The ~38 projects need to be in Postgres for the local demo on a fresh `docker compose up`.
+- Decision: Flyway versioned migration for the schema DDL, plus a separate idempotent SQL seed (`INSERT ... ON CONFLICT (slug) DO NOTHING`) for the hand-curated project data.
+- Why: Idiomatic Spring Boot migration discipline, reproducible on a fresh volume, transactional, reused by 012. Alternative rejected: JSON fixture loaded at startup (bespoke loader, outside migration history).
+- Consequences: Flyway is a project dependency from day one. Seed data never collides with admin-created rows.
+
+## DEC-011: Public list uses summary projection; full record only on detail (2026-06-22)
+- Context: The portfolio list page and marquee strip only need card-level fields, not the full project record.
+- Decision: `GET /api/projects` returns a summary projection (slug, name, sector, country, status, image, location, featurable). Full record only on `GET /api/projects/{slug}`.
+- Why: Keeps the list/marquee payload small and lets client-side filtering load the whole catalogue cheaply. Alternative rejected: returning full records in the list (larger payload, leaks detail-only fields).
+- Consequences: Two DTO shapes in the API layer. Summary fields must stay in sync with card UI needs.
+
+## DEC-010: scope stored as TEXT[], not a join table (2026-06-22)
+- Context: A project can have multiple scopes (rebar, BBS, GA, MEP, QS, as-built). Need to store the multi-valued list.
+- Decision: Postgres TEXT[] column on the project table.
+- Why: Small, fixed value list, never independently queried/filtered today. ~38 rows makes a join table over-engineering. Migration path: GIN index or join table if scope becomes a filter dimension.
+- Consequences: Simple schema. Scope filtering (if ever needed) requires a migration to add a GIN index.
+
+## DEC-009: Sector/status validated in app layer, not Postgres ENUM/CHECK (2026-06-22)
+- Context: sector and status are constrained sets that the frontend needs to display as filter options.
+- Decision: Store as TEXT in Postgres, validate in the Spring app layer, and serve the vocabulary via `GET /api/projects/filters`.
+- Why: Postgres ENUM requires a migration to extend; CHECK constraint duplicates the app's validation. A single source of truth (app + filters endpoint) avoids drift. Feature 012 can extend sectors without a DB migration.
+- Consequences: The DB does not enforce the vocabulary — the app layer must. Filter values are always discoverable via the API.
+
+## DEC-008: Marquee project names cleared for local demo (2026-06-21)
+- Context: Open question whether real project names (clients, contractors) needed legal clearance before displaying on the site.
+- Decision: Cleared for local demo use. Revisit before any public/cloud deployment.
+- Why: The site will not be deployed publicly for now; the demo runs locally only. No audience exposure risk.
+- Consequences: Features 003 (F3-AC4, marquee projects on home page) and 011 (Home page) are unblocked. A gate check before first public deploy must confirm this still holds.
+
 ## DEC-007: Added feature 011 for the core marketing pages (2026-06-18)
 - Context: The playbook port (DEC-001 through DEC-006) carried over the six original PRD features plus four new ideas, but the foundational content pages from the live site (Home, About, Services/Specializations, Contact) never got their own feature spec. They were implied as "the site everything else sits inside" but absent from specs/, which means an agent building strictly from specs/ would have skipped rebuilding them.
 - Decision: Added specs/011-core-marketing-pages, bundling all four pages as one feature rather than splitting per page, since they are low-risk content migration and layout, not independent capabilities with separable risk profiles (unlike 007-010).

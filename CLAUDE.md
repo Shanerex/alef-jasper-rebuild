@@ -13,6 +13,9 @@ A modern, lead-generating rebuild of the ALEF Architectural & Cadding Services s
 ## Architecture constraints (always-on)
 @docs/knowledge/ARCHITECTURE.md
 
+## Visual design system (always-on)
+@docs/knowledge/DESIGN_SYSTEM.md
+
 ## How this repo is run agentically
 Roles are subagents in .claude/agents/. Procedures are skills in .claude/skills/. Enforcement is in .claude/settings.json (hooks). The playbook is docs/AGENTIC_ENGINEERING_PLAYBOOK.md.
 - Start a pipeline: /orchestrate
@@ -42,7 +45,7 @@ The specs are the source of truth, not this conversation and not the code. If re
 |----|---------|--------|
 | 001 | AI RFQ Concierge | requirements approved |
 | 002 | Turnaround Estimator | requirements approved |
-| 003 | Portfolio with Filtering | requirements approved |
+| 003 | Portfolio with Filtering | done |
 | 004 | Sample Explorer | requirements approved |
 | 005 | Trust Layer | requirements approved |
 | 006 | Client Portal (stretch) | requirements draft |
@@ -55,10 +58,36 @@ The specs are the source of truth, not this conversation and not the code. If re
 
 Downstream phases (architecture, design, implementation, testing) are produced per feature by running /orchestrate.
 
+## API endpoints (implemented)
+| Method | Path | Feature | Notes |
+|--------|------|---------|-------|
+| GET | `/api/projects` | 003 | Filterable, paginated summary list |
+| GET | `/api/projects/{slug}` | 003 | Full project detail |
+| GET | `/api/projects/filters` | 003 | Sector/status vocabularies + distinct countries |
+
+## Database tables (implemented)
+| Table | Feature | Notes |
+|-------|---------|-------|
+| `project` | 003 | 15 seed rows via Flyway V2 |
+
+## Key files
+- `api/pom.xml` -- Maven project, Spring Boot 3.4.1
+- `api/src/main/resources/application.yml` -- datasource, profiles, Spring AI config
+- `api/src/main/java/com/alef/api/portfolio/` -- controller, service, repository, entity, dto, vocabulary, error
+- `api/src/main/resources/db/migration/` -- V1 (DDL), V2 (seed)
+- `web/package.json` -- Next.js 15, Tailwind, shadcn/ui
+- `web/src/app/projects/` -- list and detail pages (ISR)
+- `web/src/components/projects/` -- ProjectCard, ProjectGrid, ProjectFilters, ProjectDetail, ProjectBrowser
+- `web/src/components/ui/` -- Badge, Button, Select, Separator (shadcn/ui)
+- `web/src/lib/api/projects.ts` -- typed API client
+- `web/src/lib/types/project.ts` -- TypeScript types mirroring API DTOs
+
 ## TODOs (known gaps, not bugs)
-- Infra Compose skeleton (all services talking) before feature 001.
-- Confirm marquee project names are cleared for public marketing (business open question).
+- ~~Infra Compose skeleton (all services talking) before feature 001.~~ -> api/ and web/ Dockerfiles created; compose should work.
+- ~~Confirm marquee project names are cleared for public marketing~~ -> cleared for local demo (DEC-008); revisit before public deploy.
 - Decide lead delivery target (email only vs email plus Google Sheet/CRM).
+- Seed remaining ~23 projects (15 of ~38 seeded in V2).
+- On deploy: switch portfolio pages from `force-dynamic` to ISR (`revalidate=60`) if API is available at build time (see PITFALL-007).
 
 ## Running locally
 \`\`\`bash
