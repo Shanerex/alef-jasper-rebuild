@@ -44,8 +44,9 @@ Rigor goes where failure is expensive:
 ## Data model
 
 ```
-project  { slug, name, sector, country, status, image, description,
-           main_contractor, client, consultant, location }
+project  { id, slug, name, sector, country, status, image, description,
+           main_contractor, client, consultant, location,
+           scope[], featurable, created_at, updated_at }
 team     { name, role, company, email, photo }
 sample   { slug, title, preview, file, category }
 lead     { id, created_at, source, name, email, company, phone,

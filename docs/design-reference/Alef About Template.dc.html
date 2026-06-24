@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Noto+Serif+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #07111C; -webkit-font-smoothing: antialiased; min-width: 1280px; }
+  </style>
+</helmet>
+
+<!-- NAV -->
+<nav style="position: sticky; top: 0; z-index: 100; background: #07111C; border-bottom: 1px solid rgba(196,151,58,0.22); height: 72px; display: flex; align-items: center;">
+  <div style="max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 80px; display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.08em; color: #C4973A;">ALEF</span>
+        <span style="font-family: 'Noto Serif Arabic', serif; font-size: 16px; color: rgba(196,151,58,0.4);">ألف</span>
+      </div>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 300; letter-spacing: 0.14em; color: #4A5B6E; text-transform: uppercase; margin-top: 1px;">Architectural &amp; Cadding Services</p>
+    </div>
+    <div style="display: flex; gap: 36px; align-items: center;">
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">About</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Services</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Projects</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Samples</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Contact</a>
+      <a href="#" style="background: #C4973A; padding: 11px 26px; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #07111C; text-transform: uppercase; text-decoration: none; display: inline-block;">Enquire Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="background: #0C1B2E; padding: 100px 0 80px; position: relative; overflow: hidden;">
+  <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(rgba(196,151,58,0.03) 0 1px, transparent 1px 72px), repeating-linear-gradient(90deg, rgba(196,151,58,0.03) 0 1px, transparent 1px 72px); background-size: 72px 72px;"></div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px; position: relative;">
+    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 500; letter-spacing: 0.12em; color: #4A5B6E; text-transform: uppercase; text-decoration: none;">Home</a>
+      <span style="color: rgba(196,151,58,0.4); font-size: 10px;">›</span>
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 500; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase;">About Us</span>
+    </div>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.24em; color: #C4973A; text-transform: uppercase; margin-bottom: 16px;">Our Story</p>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: #E8E0D0; line-height: 1.1; margin-bottom: 12px;">About Alef</h1>
+    <p style="font-family: 'Noto Serif Arabic', serif; font-size: 22px; font-weight: 300; color: rgba(196,151,58,0.5); direction: rtl; margin-bottom: 28px;">من نحن</p>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.8; color: #7A8FA8; max-width: 600px;">Over two decades of engineering excellence, delivering premium structural and cadding services to the Gulf's most ambitious construction projects.</p>
+  </div>
+</section>
+
+<!-- GOLD RULE -->
+<div style="background: #C4973A; height: 4px;"></div>
+
+<!-- COMPANY STORY -->
+<section style="padding: 120px 0; background: #07111C;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px; display: flex; gap: 80px; align-items: flex-start;">
+    <div style="flex: 1;">
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.24em; color: #C4973A; text-transform: uppercase; margin-bottom: 14px;">Established 2003</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: #E8E0D0; line-height: 1.15; margin-bottom: 32px;">Two Decades of<br><em style="font-style: italic; color: #C4973A;">Engineering Excellence</em></h2>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; line-height: 1.8; color: #B8B0A0; margin-bottom: 24px;">"In view of the boom and vast growth in the Construction Industry, Alef Architectural &amp; Cadding Services L.L.C. was established in March 2003."</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300; line-height: 1.9; color: #5A6B80; margin-bottom: 20px;">Since then the company has been providing premium quality services such as preparing Architectural Prospective Drawings, Structural General Arrangement, Co-ordinate Drawings, MEP, Rebar Shop Drawings, Bar Bending Schedules, As-Built drawings and Quantity Surveying.</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 300; line-height: 1.9; color: #5A6B80; margin-bottom: 36px;">Alef has its Indian Back-Of Corporate Office M/s. Jasper International Engineering Consultants at Vasudevanallur of Tirunelveli District, Tamil Nadu in South India — with facilities to employ 246 staff, fully functional with a large Work-Station and Quality Control department.</p>
+      <p style="font-family: 'Noto Serif Arabic', serif; font-size: 14px; font-weight: 300; line-height: 2; color: rgba(196,151,58,0.45); direction: rtl; text-align: right; padding-top: 24px; border-top: 1px solid rgba(196,151,58,0.1);">تأسست في مارس ٢٠٠٣ في دبي، ونمت لتصبح شريكاً موثوقاً للمطورين والمقاولين في منطقة الخليج، بطاقة استيعابية تبلغ ٢٤٦ موظفاً متخصصاً.</p>
+    </div>
+    <div style="flex: 0 0 400px;">
+      <div style="height: 360px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+        <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">office / team photograph</span>
+      </div>
+      <div style="background: #0E2035; border-top: 2px solid #C4973A; padding: 20px 24px;">
+        <p style="font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; margin-bottom: 4px;">Dubai Head Office</p>
+        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 300; color: #5A6B80; line-height: 1.7;">Office 39 &amp; 40, White Future Business Centre,<br>1st Floor Madina Mall, Al Qusais, Dubai — UAE</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div style="background: #0C1B2E; border-top: 1px solid rgba(196,151,58,0.12); border-bottom: 1px solid rgba(196,151,58,0.12);">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px; height: 120px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="text-align: center;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #C4973A; line-height: 1;">20+</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.18em; color: #5A6B80; text-transform: uppercase; margin-top: 4px;">Years Active</p>
+    </div>
+    <div style="width: 1px; height: 50px; background: rgba(196,151,58,0.15);"></div>
+    <div style="text-align: center;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #C4973A; line-height: 1;">200+</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.18em; color: #5A6B80; text-transform: uppercase; margin-top: 4px;">Projects Delivered</p>
+    </div>
+    <div style="width: 1px; height: 50px; background: rgba(196,151,58,0.15);"></div>
+    <div style="text-align: center;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #C4973A; line-height: 1;">246</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.18em; color: #5A6B80; text-transform: uppercase; margin-top: 4px;">Staff Capacity</p>
+    </div>
+    <div style="width: 1px; height: 50px; background: rgba(196,151,58,0.15);"></div>
+    <div style="text-align: center;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #C4973A; line-height: 1;">2</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.18em; color: #5A6B80; text-transform: uppercase; margin-top: 4px;">Offices (UAE + India)</p>
+    </div>
+    <div style="width: 1px; height: 50px; background: rgba(196,151,58,0.15);"></div>
+    <div style="text-align: center;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #C4973A; line-height: 1;">GCC</p>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.18em; color: #5A6B80; text-transform: uppercase; margin-top: 4px;">Region Served</p>
+    </div>
+  </div>
+</div>
+
+<!-- TWO OFFICES -->
+<section style="padding: 120px 0; background: #07111C;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px;">
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.24em; color: #C4973A; text-transform: uppercase; margin-bottom: 14px;">Our Locations</p>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: #E8E0D0; line-height: 1.1; margin-bottom: 56px;">Dual-Office Operation</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <!-- Dubai -->
+      <div>
+        <div style="height: 240px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">Dubai office photograph</span>
+        </div>
+        <div style="padding: 36px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.2em; color: #C4973A; text-transform: uppercase; margin-bottom: 12px;">Head Office · Dubai, UAE</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #E8E0D0; margin-bottom: 16px;">Alef Architectural &amp; Cadding Services LLC</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.8; margin-bottom: 20px;">Office 39 &amp; 40, White Future Business Centre,<br>1st Floor Madina Mall, Al Qusais<br>PO Box 65825, Dubai — UAE</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #C4973A;">+971 4 251 3840</p>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #C4973A;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f495989192989897b495989192d99e9587849186da979b99">[email&#160;protected]</a></p>
+          </div>
+        </div>
+      </div>
+      <!-- India -->
+      <div>
+        <div style="height: 240px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">India office photograph</span>
+        </div>
+        <div style="padding: 36px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.2em; color: #C4973A; text-transform: uppercase; margin-bottom: 12px;">Back Office · Tamil Nadu, India</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #E8E0D0; margin-bottom: 16px;">Jasper International Engineering Consultants</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.8; margin-bottom: 20px;">Vasudevanallur, Tirunelveli District<br>Tamil Nadu — South India<br>246-staff capacity with full Quality Control</p>
+          <div style="background: #07111C; padding: 16px; border: 1px solid rgba(196,151,58,0.15);">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; color: #5A6B80; line-height: 1.7;">Large Work-Station facility · Full Quality Control department · Capacity for 246 engineering professionals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background: #C4973A;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 80px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: #07111C; line-height: 1.1; margin-bottom: 8px;">Ready to work with us?</h2>
+      <p style="font-family: 'Noto Serif Arabic', serif; font-size: 16px; font-weight: 300; color: rgba(7,17,28,0.5); direction: rtl;">هل أنت مستعد للعمل معنا؟</p>
+    </div>
+    <a href="#" style="background: #07111C; padding: 18px 40px; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; text-decoration: none; display: inline-block; flex-shrink: 0;">Send an Enquiry</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #040C14; border-top: 1px solid rgba(196,151,58,0.15); padding: 40px 80px;">
+  <div style="max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.08em; color: rgba(196,151,58,0.4);">ALEF</span>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; color: #2A3B4C;">© 2025 Alef Architectural &amp; Cadding Services LLC · Dubai, UAE</p>
+  </div>
+</footer>
+</x-dc>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

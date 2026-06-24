@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Dark Prestige base styles per DESIGN_SYSTEM.md.
+   * Body: deep navy (#07111C), warm cream text (#E8E0D0), antialiased.
+   * Headings: Cormorant Garamond serif, light weight.
+   */
+  body {
+    background: #07111C;
+    color: #E8E0D0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}

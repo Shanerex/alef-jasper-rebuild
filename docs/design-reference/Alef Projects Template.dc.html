@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Noto+Serif+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #07111C; -webkit-font-smoothing: antialiased; min-width: 1280px; }
+  </style>
+</helmet>
+
+<!-- NAV -->
+<nav style="position: sticky; top: 0; z-index: 100; background: #07111C; border-bottom: 1px solid rgba(196,151,58,0.22); height: 72px; display: flex; align-items: center;">
+  <div style="max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 80px; display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.08em; color: #C4973A;">ALEF</span>
+        <span style="font-family: 'Noto Serif Arabic', serif; font-size: 16px; color: rgba(196,151,58,0.4);">ألف</span>
+      </div>
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 300; letter-spacing: 0.14em; color: #4A5B6E; text-transform: uppercase; margin-top: 1px;">Architectural &amp; Cadding Services</p>
+    </div>
+    <div style="display: flex; gap: 36px; align-items: center;">
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">About</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Services</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">Projects</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Samples</a>
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; color: #7A8FA8; text-transform: uppercase; text-decoration: none;">Contact</a>
+      <a href="#" style="background: #C4973A; padding: 11px 26px; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #07111C; text-transform: uppercase; text-decoration: none; display: inline-block;">Enquire Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="background: #0C1B2E; padding: 100px 0 80px; position: relative; overflow: hidden;">
+  <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(rgba(196,151,58,0.03) 0 1px, transparent 1px 72px), repeating-linear-gradient(90deg, rgba(196,151,58,0.03) 0 1px, transparent 1px 72px); background-size: 72px 72px;"></div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px; position: relative;">
+    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
+      <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 500; letter-spacing: 0.12em; color: #4A5B6E; text-transform: uppercase; text-decoration: none;">Home</a>
+      <span style="color: rgba(196,151,58,0.4); font-size: 10px;">›</span>
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 500; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase;">Projects</span>
+    </div>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.24em; color: #C4973A; text-transform: uppercase; margin-bottom: 16px;">Our Portfolio</p>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: #E8E0D0; line-height: 1.1; margin-bottom: 12px;">Projects</h1>
+    <p style="font-family: 'Noto Serif Arabic', serif; font-size: 22px; font-weight: 300; color: rgba(196,151,58,0.5); direction: rtl; margin-bottom: 28px;">مشاريعنا</p>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.8; color: #7A8FA8; max-width: 600px;">A selection of ongoing and completed projects across the UAE, Saudi Arabia, Oman and the wider Gulf region.</p>
+  </div>
+</section>
+<div style="background: #C4973A; height: 4px;"></div>
+
+<!-- FILTER BAR -->
+<div style="background: #07111C; border-bottom: 1px solid rgba(196,151,58,0.12);">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px; height: 64px; display: flex; align-items: center; gap: 4px;">
+    <div style="background: #C4973A; padding: 10px 24px;">
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #07111C; text-transform: uppercase;">All Projects</span>
+    </div>
+    <div style="padding: 10px 24px; border: 1px solid rgba(196,151,58,0.2);">
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.14em; color: #7A8FA8; text-transform: uppercase;">Ongoing</span>
+    </div>
+    <div style="padding: 10px 24px; border: 1px solid rgba(196,151,58,0.2);">
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.14em; color: #7A8FA8; text-transform: uppercase;">Completed</span>
+    </div>
+    <div style="flex: 1;"></div>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300; color: #4A5B6E; letter-spacing: 0.08em;">Showing all projects</p>
+  </div>
+</div>
+
+<!-- PROJECTS GRID -->
+<section style="padding: 80px 0 120px; background: #07111C;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 80px;">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+
+      <!-- Project 1 — LARGE (spans 2 cols) -->
+      <div style="grid-column: span 2;">
+        <div style="height: 360px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; position: relative;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">project photograph</span>
+          <div style="position: absolute; top: 20px; left: 20px; background: #C4973A; padding: 6px 14px;">
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0.14em; color: #07111C; text-transform: uppercase;">Ongoing</span>
+          </div>
+        </div>
+        <div style="padding: 28px 32px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; margin-bottom: 8px;">Riyadh, Saudi Arabia</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: #E8E0D0; margin-bottom: 10px; line-height: 1.2;">Riyadh Exit 10 Mall</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.7; margin-bottom: 16px;">Construction of a mall, shops, food court, entertainment area, infrastructure works, parking facilities and associated facilities in King Khalid district.</p>
+          <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div>
+        <div style="height: 360px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; position: relative;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">project photograph</span>
+          <div style="position: absolute; top: 20px; left: 20px; background: #0E2035; border: 1px solid rgba(196,151,58,0.3); padding: 6px 14px;">
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase;">Completed</span>
+          </div>
+        </div>
+        <div style="padding: 28px 32px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; margin-bottom: 8px;">Dubai, UAE</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #E8E0D0; margin-bottom: 10px; line-height: 1.2;">The Heart of Europe</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.7; margin-bottom: 16px;">Main Contractor: J K Bauen · Developer: THOE Limited. Portofino Hotel — exclusive mixed-use waterfront development.</p>
+          <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div>
+        <div style="height: 280px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; position: relative;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">project photograph</span>
+          <div style="position: absolute; top: 20px; left: 20px; background: #0E2035; border: 1px solid rgba(196,151,58,0.3); padding: 6px 14px;">
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase;">Completed</span>
+          </div>
+        </div>
+        <div style="padding: 28px 32px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; margin-bottom: 8px;">Muscat, Oman</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #E8E0D0; margin-bottom: 10px; line-height: 1.2;">Oman Botanic Garden</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.7; margin-bottom: 16px;">Located at the foot of the Al Hajar Mountains — one of the rarest ecosystems where ancient seabed meets highland terrain.</p>
+          <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div>
+        <div style="height: 280px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; position: relative;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">project photograph</span>
+          <div style="position: absolute; top: 20px; left: 20px; background: #0E2035; border: 1px solid rgba(196,151,58,0.3); padding: 6px 14px;">
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase;">Completed</span>
+          </div>
+        </div>
+        <div style="padding: 28px 32px; background: #0E2035; border-top: 2px solid #C4973A;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; margin-bottom: 8px;">Dubai, UAE</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #E8E0D0; margin-bottom: 10px; line-height: 1.2;">Jumeirah Plot D</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #5A6B80; line-height: 1.7; margin-bottom: 16px;">B+G+2 mixed-use development — basement parking, ground retail, prayer facilities and residential units above.</p>
+          <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #C4973A; text-transform: uppercase; text-decoration: none;">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Project 5 — placeholder -->
+      <div>
+        <div style="height: 280px; background: repeating-linear-gradient(135deg, #0A1828 0, #0A1828 12px, #0E2035 12px, #0E2035 24px); display: flex; align-items: center; justify-content: center; position: relative;">
+          <span style="font-family: monospace; font-size: 9px; color: rgba(196,151,58,0.25); letter-spacing: 0.1em; text-transform: uppercase;">project photograph</span>
+        </div>
+        <div style="padding: 28px 32px; background: #0E2035; border-top: 2px solid rgba(196,151,58,0.3);">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: #5A6B80; text-transform: uppercase; margin-bottom: 8px;">Location</p>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #5A6B80; margin-bottom: 10px; line-height: 1.2;">Project Name</h3>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; color: #3A4B5C; line-height: 1.7; margin-bottom: 16px;">Brief description of the project and scope of Alef's work.</p>
+          <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #4A5B6E; text-transform: uppercase; text-decoration: none;">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Load more -->
+    <div style="margin-top: 56px; text-align: center;">
+      <div style="border: 1px solid rgba(196,151,58,0.3); padding: 16px 48px; display: inline-block; cursor: pointer;">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase;">Load More Projects</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background: #C4973A;">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 80px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: #07111C; line-height: 1.1; margin-bottom: 8px;">Start your next project with Alef.</h2>
+      <p style="font-family: 'Noto Serif Arabic', serif; font-size: 16px; font-weight: 300; color: rgba(7,17,28,0.5); direction: rtl;">ابدأ مشروعك القادم مع ألف</p>
+    </div>
+    <a href="#" style="background: #07111C; padding: 18px 40px; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: #C4973A; text-transform: uppercase; text-decoration: none; display: inline-block; flex-shrink: 0;">Send an Enquiry</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #040C14; border-top: 1px solid rgba(196,151,58,0.15); padding: 40px 80px;">
+  <div style="max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.08em; color: rgba(196,151,58,0.4);">ALEF</span>
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; color: #2A3B4C;">© 2025 Alef Architectural &amp; Cadding Services LLC · Dubai, UAE</p>
+  </div>
+</footer>
+</x-dc>
+</body>
+</html>

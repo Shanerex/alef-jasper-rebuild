@@ -25,7 +25,9 @@ services:
       SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
       SPRING_AI_OLLAMA_CHAT_MODEL: llama3.2
       SPRING_AI_OLLAMA_EMBEDDING_MODEL: nomic-embed-text
-    depends_on: [postgres, qdrant, redis, ollama]
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   worker:
     build: ./api
@@ -39,7 +41,9 @@ services:
       QDRANT_PORT: "6333"
       SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
       SPRING_AI_OLLAMA_EMBEDDING_MODEL: nomic-embed-text
-    depends_on: [postgres, qdrant, redis, ollama]
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:16-alpine
@@ -50,6 +54,11 @@ services:
     ports: ["5432:5432"]
     volumes:
       - ./infra/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alef -d alef"]
+      interval: 2s
+      timeout: 3s
+      retries: 10
 
   qdrant:
     image: qdrant/qdrant   # pin a version tag before any real use
