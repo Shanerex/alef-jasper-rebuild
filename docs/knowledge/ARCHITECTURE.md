@@ -53,6 +53,8 @@ lead     { id, created_at, source, name, email, company, phone,
            project_name, sector, country, scope[], tonnage,
            drawing_count, software_standard, deadline, attachment_ref,
            conversation_ref }
+trust_content { id, item_key, item_type, label, value, unit, display_order,
+               created_at, updated_at }
 kb_chunk // in Qdrant: { id, source_type, source_ref, text, vector, payload }
 ```
 

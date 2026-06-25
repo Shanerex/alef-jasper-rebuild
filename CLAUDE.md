@@ -47,7 +47,7 @@ The specs are the source of truth, not this conversation and not the code. If re
 | 002 | Turnaround Estimator | requirements approved |
 | 003 | Portfolio with Filtering | done |
 | 004 | Sample Explorer | requirements approved |
-| 005 | Trust Layer | requirements approved |
+| 005 | Trust Layer | done |
 | 006 | Client Portal (stretch) | requirements draft |
 | 007 | Savings Calculator | requirements approved |
 | 008 | Bilingual EN/AR | requirements approved |
@@ -64,23 +64,29 @@ Downstream phases (architecture, design, implementation, testing) are produced p
 | GET | `/api/projects` | 003 | Filterable, paginated summary list |
 | GET | `/api/projects/{slug}` | 003 | Full project detail |
 | GET | `/api/projects/filters` | 003 | Sector/status vocabularies + distinct countries |
+| GET | `/api/trust/overview` | 005 | Composed trust payload: stats, clients, contractors, software, standards |
 
 ## Database tables (implemented)
 | Table | Feature | Notes |
 |-------|---------|-------|
 | `project` | 003 | 15 seed rows via Flyway V2 |
+| `trust_content` | 005 | 9 seed rows via Flyway V5 (3 stats, 3 software, 3 standards) |
 
 ## Key files
 - `api/pom.xml` -- Maven project, Spring Boot 3.4.1
 - `api/src/main/resources/application.yml` -- datasource, profiles, Spring AI config
 - `api/src/main/java/com/alef/api/portfolio/` -- controller, service, repository, entity, dto, vocabulary, error
-- `api/src/main/resources/db/migration/` -- V1 (DDL), V2 (seed)
+- `api/src/main/java/com/alef/api/trust/` -- controller, service, repository, entity, dto, vocabulary (feature 005)
+- `api/src/main/resources/db/migration/` -- V1 (DDL), V2 (seed), V4 (trust_content DDL), V5 (trust_content seed)
 - `web/package.json` -- Next.js 15, Tailwind, shadcn/ui
 - `web/src/app/projects/` -- list and detail pages (ISR)
 - `web/src/components/projects/` -- ProjectCard, ProjectGrid, ProjectFilters, ProjectDetail, ProjectBrowser
 - `web/src/components/ui/` -- Badge, Button, Select, Separator (shadcn/ui)
 - `web/src/lib/api/projects.ts` -- typed API client
 - `web/src/lib/types/project.ts` -- TypeScript types mirroring API DTOs
+- `web/src/components/trust/` -- TrustLayer, TrustStats, ClientStrip, CapabilityBadges, TrustLayerSection (feature 005)
+- `web/src/lib/api/trust.ts` -- typed API client for trust overview
+- `web/src/lib/types/trust.ts` -- TypeScript types mirroring trust API DTOs
 
 ## TODOs (known gaps, not bugs)
 - ~~Infra Compose skeleton (all services talking) before feature 001.~~ -> api/ and web/ Dockerfiles created; compose should work.

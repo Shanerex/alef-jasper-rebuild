@@ -2,6 +2,24 @@
 
 > Append-only. Newest first. Why a choice was made, not just what.
 
+## DEC-015: One composed GET /api/trust/overview endpoint (2026-06-24)
+- Context: The Trust Layer is one logical page block with three sub-sections (stats, client/contractor strip, capability badges).
+- Decision: One composed endpoint mixes stored editorial content from `trust_content` with live project aggregates, rather than several granular endpoints.
+- Why: One fetch keeps `web` integration and ISR revalidation simple. The synthesized marquee count means F5-AC1 is satisfied without hand-syncing a number. Does not preclude F012 reuse — F012 edits the underlying rows and the change surfaces on next read.
+- Consequences: Single round-trip for the whole block. If a future feature needs just one slice, a granular endpoint can be added without breaking this one.
+
+## DEC-014: Project-derived trust facts computed live, never stored in trust_content (2026-06-24)
+- Context: Marquee project count, client names, and contractor names are already in the `project` table (F003).
+- Decision: Derive them at read time (`count(*) WHERE featurable = TRUE`, `DISTINCT client`, `DISTINCT main_contractor`) rather than duplicating into `trust_content`.
+- Why: Prevents trust copy drifting from the portfolio; single source of truth. No redundant write path.
+- Consequences: Trust Layer stats auto-update when projects are added/edited. No admin override for these specific values (correct — they should match reality).
+
+## DEC-013: Trust editorial facts stored in a narrow trust_content key/value table (2026-06-24)
+- Context: F5-AC1/AC3 require displaying stats (years in business, staff count, steel capacity) and capability badges (software, standards) that aren't derivable from existing tables. F012 (Admin Content Management) will need to edit this content.
+- Decision: New `trust_content` key/value table in Postgres (Flyway V4 schema, V5 seed), not static JSON in `web/`.
+- Why: `ARCHITECTURE.md` names `api` as the content-read service. JSON in `web` would force a redeploy to fix a stat and split content ownership. A key/value shape lets F012 add/edit/retire items without a per-field migration.
+- Consequences: One small new table. F012 gets a ready-made write target. Exact seed values are demo content (DEC-008).
+
 ## DEC-012: Flyway migration plus idempotent SQL seed for project data (2026-06-22)
 - Context: The ~38 projects need to be in Postgres for the local demo on a fresh `docker compose up`.
 - Decision: Flyway versioned migration for the schema DDL, plus a separate idempotent SQL seed (`INSERT ... ON CONFLICT (slug) DO NOTHING`) for the hand-curated project data.
