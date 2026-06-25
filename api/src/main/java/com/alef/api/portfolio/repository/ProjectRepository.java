@@ -28,4 +28,27 @@ public interface ProjectRepository
      */
     @Query("SELECT DISTINCT p.country FROM ProjectEntity p ORDER BY p.country")
     List<String> findDistinctCountries();
+
+    /**
+     * Returns distinct non-null client names, ordered alphabetically.
+     * Used by the trust overview (architecture 3.1, F5-AC2) to derive the
+     * client name strip from the portfolio without duplicating data.
+     */
+    @Query("SELECT DISTINCT p.client FROM ProjectEntity p WHERE p.client IS NOT NULL ORDER BY p.client")
+    List<String> findDistinctClients();
+
+    /**
+     * Returns distinct non-null main contractor names, ordered alphabetically.
+     * Used by the trust overview (architecture 3.1, F5-AC2) to derive the
+     * contractor name strip from the portfolio without duplicating data.
+     */
+    @Query("SELECT DISTINCT p.mainContractor FROM ProjectEntity p WHERE p.mainContractor IS NOT NULL ORDER BY p.mainContractor")
+    List<String> findDistinctMainContractors();
+
+    /**
+     * Counts projects marked as featurable (marquee projects).
+     * Used by the trust overview (architecture 3.1, F5-AC1) to synthesize
+     * the marquee project count stat live from the portfolio.
+     */
+    long countByFeaturableTrue();
 }
