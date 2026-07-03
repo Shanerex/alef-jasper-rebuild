@@ -1,69 +1,80 @@
-import Link from "next/link";
+import { HomeHero } from "@/components/home/home-hero";
+import { CapabilityStrip } from "@/components/home/capability-strip";
+import { FeaturedProjects } from "@/components/home/featured-projects";
+import { HomeCTA } from "@/components/home/home-cta";
+import { TrustLayer } from "@/components/trust/trust-layer";
+import { getProjects } from "@/lib/api/projects";
+import { getTrustOverview } from "@/lib/api/trust";
+import type { Metadata } from "next";
 
 /**
- * Minimal home page placeholder in the Dark Prestige style.
+ * Home page (feature 011, F11-AC1, F11-AC2).
  *
- * Feature 011 (Core Marketing Pages) will replace this with the full home
- * page including hero, stats bar, services, featured projects, about, and CTA.
- * For now, directs visitors to the portfolio with the prestige aesthetic.
+ * Server component. Replaces the placeholder with the full marketing home page.
+ * Composes featured projects from 003 (getProjects) and trust stats from 005
+ * (getTrustOverview) without duplicating data or components (F11-AC2).
+ *
+ * force-dynamic: defers fetches to request time — the web container builds
+ * before the api container is running in Docker Compose (PITFALL-007).
+ * The API clients already pass next: { revalidate: 60 } so flipping to ISR
+ * is a one-line change once the deploy model makes the API available at build time.
+ *
+ * Graceful degradation: the try/catch renders static sections and a muted
+ * loading message in place of the data-fetched sections on a cold API.
  */
-export default function Home() {
-  return (
-    <section className="bg-surface-1 relative overflow-hidden">
-      {/* Grid pattern overlay */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(rgba(196,151,58,0.03) 0 1px, transparent 1px 72px), repeating-linear-gradient(90deg, rgba(196,151,58,0.03) 0 1px, transparent 1px 72px)",
-          backgroundSize: "72px 72px",
-        }}
-      />
+export const dynamic = "force-dynamic";
 
-      <div className="relative mx-auto max-w-site px-[80px] py-[120px]">
-        <div className="max-w-2xl space-y-8">
-          {/* Section label */}
-          <p
-            className="font-sans text-[9.5px] font-bold uppercase text-gold"
-            style={{ letterSpacing: "0.24em" }}
-          >
-            Est. 2003 &middot; Dubai, UAE
-          </p>
+export const metadata: Metadata = {
+  // Home is the root — does not use the "%s | ALEF …" template; it IS the brand.
+  title: "ALEF Architectural & Cadding Services",
+  description:
+    "GCC rebar detailing and structural drafting consultancy. 23 years. 70,000 tonnes/month. Six countries. Rebar shop drawings, BBS, GA, MEP, setting-out and as-built drawings.",
+};
 
-          {/* Headline */}
-          <h1 className="font-serif text-[72px] font-light leading-[1.1] text-text-primary">
-            Engineering{" "}
-            <span className="italic text-gold">Excellence</span>
-            <br />
-            Since 2003.
-          </h1>
+/** Static capability list for the strip under the hero (design §1.2). */
+const CAPABILITY_ITEMS = [
+  "Rebar Shop Drawings",
+  "Bar Bending Schedules",
+  "GA Drawings",
+  "Setting-Out",
+  "MEP",
+  "As-Built",
+];
 
-          {/* Description */}
-          <p className="max-w-[480px] font-sans text-[15px] font-light leading-[1.8] text-text-muted">
-            Structural shop drawings, MEP co-ordination and quantity surveying
-            for leading Gulf-region contractors and developers. Premium quality,
-            precision delivery.
-          </p>
+export default async function HomePage() {
+  try {
+    const [projectsResponse, trustOverview] = await Promise.all([
+      getProjects({ featurable: true, size: 50 }),
+      getTrustOverview(),
+    ]);
 
-          {/* CTAs */}
-          <div className="flex items-center gap-3.5">
-            <Link
-              href="/projects"
-              className="inline-block bg-gold px-9 py-4 font-sans text-[10px] font-bold uppercase text-page transition-colors hover:bg-gold-light"
-              style={{ letterSpacing: "0.14em" }}
-            >
-              View Our Projects
-            </Link>
-            <Link
-              href="#"
-              className="inline-block border border-gold/40 px-9 py-4 font-sans text-[10px] font-bold uppercase text-gold transition-colors hover:border-gold"
-              style={{ letterSpacing: "0.14em" }}
-            >
-              Our Services
-            </Link>
-          </div>
-        </div>
+    return (
+      <div>
+        <HomeHero />
+        {/* 4px gold accent bar */}
+        <div className="h-1 bg-gold" />
+
+        <CapabilityStrip items={CAPABILITY_ITEMS} />
+        <FeaturedProjects projects={projectsResponse.content} />
+        <TrustLayer data={trustOverview} />
+        <HomeCTA />
       </div>
-    </section>
-  );
+    );
+  } catch {
+    // Cold API fallback: static sections render; data sections show loading message.
+    return (
+      <div>
+        <HomeHero />
+        <div className="h-1 bg-gold" />
+        <CapabilityStrip items={CAPABILITY_ITEMS} />
+        <div className="bg-page py-20 text-center">
+          <p className="font-sans text-[15px] font-light text-text-muted">
+            Featured work and stats are loading &mdash; please refresh in a
+            moment.
+          </p>
+        </div>
+        <HomeCTA />
+      </div>
+    );
+  }
 }

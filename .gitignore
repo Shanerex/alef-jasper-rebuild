@@ -22,3 +22,4 @@ build/
 
 .vscode/
 docs/AGENTIC_ENGINEERING_PLAYBOOK.MD
+docs/content/*
