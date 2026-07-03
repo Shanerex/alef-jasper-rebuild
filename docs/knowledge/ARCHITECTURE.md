@@ -44,14 +44,20 @@ Rigor goes where failure is expensive:
 ## Data model
 
 ```
-project  { slug, name, sector, country, status, image, description,
-           main_contractor, client, consultant, location }
-team     { name, role, company, email, photo }
+project  { id, slug, name, sector, country, status, image, description,
+           main_contractor, client, consultant, location,
+           scope[], featurable, created_at, updated_at }
+team     { id, name, role, company, email, photo, display_order, active,
+           created_at, updated_at }
+office   { id, office_key, name, address_lines[], phones[], email,
+           map_query, display_order, created_at, updated_at }
 sample   { slug, title, preview, file, category }
-lead     { id, created_at, source, name, email, company, phone,
+lead     { id, created_at, source, name, email, company, phone, message,
            project_name, sector, country, scope[], tonnage,
            drawing_count, software_standard, deadline, attachment_ref,
            conversation_ref }
+trust_content { id, item_key, item_type, label, value, unit, display_order,
+               created_at, updated_at }
 kb_chunk // in Qdrant: { id, source_type, source_ref, text, vector, payload }
 ```
 
