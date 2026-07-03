@@ -19,13 +19,16 @@ export const metadata: Metadata = {
     "GCC rebar detailing and structural drafting consultancy. Portfolio of airport, infrastructure, hospitality, and residential projects across the Gulf region.",
 };
 
-/** Navigation link items for the main nav bar. */
+/** Navigation link items for the main nav bar.
+ *  About / Services / Contact are wired to their 011 routes.
+ *  Samples stays # until feature 004 ships.
+ *  "Enquire Now" CTA points to /contact until 001 rewires it to the concierge. */
 const NAV_LINKS = [
-  { href: "#", label: "About" },
-  { href: "#", label: "Services" },
+  { href: "/about",    label: "About" },
+  { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
-  { href: "#", label: "Samples" },
-  { href: "#", label: "Contact" },
+  { href: "#",         label: "Samples" },
+  { href: "/contact",  label: "Contact" },
 ] as const;
 
 export default function RootLayout({
@@ -111,8 +114,9 @@ function SiteNav() {
               {link.label}
             </Link>
           ))}
+          {/* "Enquire Now" → /contact until 001 wires the concierge (F11-AC8) */}
           <Link
-            href="#"
+            href="/contact"
             className="inline-block bg-gold px-[26px] py-[11px] font-sans text-[9px] font-bold uppercase text-page transition-colors hover:bg-gold-light"
             style={{ letterSpacing: "0.14em" }}
           >
@@ -143,8 +147,9 @@ function SiteFooter() {
         >
           ALEF
         </span>
+        {/* Dynamic year (F11-AC9) — never goes stale. "ALEF" and "Cadding" are correct. */}
         <p className="font-sans text-[10px] font-light" style={{ color: "#2A3B4C" }}>
-          &copy; 2025 Alef Architectural &amp; Cadding Services LLC &middot; Dubai, UAE
+          &copy; {new Date().getFullYear()} ALEF Architectural &amp; Cadding Services LLC &middot; Dubai, UAE
         </p>
       </div>
     </footer>
