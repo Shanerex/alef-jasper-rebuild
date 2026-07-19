@@ -1,4 +1,5 @@
 import type { TeamMember } from "@/lib/types/team";
+import { resolveUploadUrl } from "@/lib/utils";
 
 /**
  * Team member card (design §5, F11-AC3).
@@ -45,7 +46,7 @@ export function TeamCard({ member }: TeamCardProps) {
       >
         {photo ? (
           <img
-            src={photo}
+            src={resolveUploadUrl(photo) ?? undefined}
             alt={name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             loading="lazy"

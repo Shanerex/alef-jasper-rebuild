@@ -5,6 +5,7 @@ import com.alef.api.team.dto.TeamOverviewDto;
 import com.alef.api.team.service.TeamService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,8 +23,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * Verifies the REST contract (status code, JSON shape, nullable fields) with a
  * mocked service, mirroring the TrustControllerTest pattern from feature 005.
+ *
+ * addFilters = false (feature 012): see OfficeControllerTest's class doc.
  */
 @WebMvcTest(TeamController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TeamControllerTest {
 
     @Autowired

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import type { ProjectDetail as ProjectDetailType } from "@/lib/types/project";
 import { SECTOR_LABELS, STATUS_LABELS } from "@/lib/types/project";
+import { resolveUploadUrl } from "@/lib/utils";
 
 interface ProjectDetailProps {
   project: ProjectDetailType;
@@ -50,7 +51,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {project.image ? (
         <div className="relative mb-12 aspect-[21/9] w-full overflow-hidden bg-surface-2">
           <img
-            src={project.image}
+            src={resolveUploadUrl(project.image) ?? undefined}
             alt={project.name}
             className="h-full w-full object-cover"
           />

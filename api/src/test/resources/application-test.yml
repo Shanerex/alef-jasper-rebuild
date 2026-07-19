@@ -20,8 +20,25 @@ spring:
     ollama:
       enabled: false
 
+  # No real Redis in tests (feature 012): admin sessions fall back to Spring's
+  # default in-memory HttpSession. WebMvcTest slices never trigger
+  # SessionAutoConfiguration anyway, but this keeps a stray full-context test
+  # from needing a live Redis for sessions.
+  session:
+    store-type: none
+
   autoconfigure:
     exclude:
       - org.springframework.ai.autoconfigure.ollama.OllamaAutoConfiguration
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
       - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+# Test defaults for the admin env-seed values (feature 012) -- AdminCredentialSeederTest
+# constructs the seeder directly with explicit values rather than relying on these,
+# but they keep a stray full-context test from failing on a missing property.
+alef:
+  admin:
+    username: test-admin
+    password-hash: "$2a$10$abcdefghijklmnopqrstuvABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+  web-origin: http://localhost:3000
+  upload-dir: ${java.io.tmpdir:/tmp}/alef-uploads-test

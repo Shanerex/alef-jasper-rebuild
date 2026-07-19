@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ProjectSummary } from "@/lib/types/project";
 import { STATUS_LABELS } from "@/lib/types/project";
+import { resolveUploadUrl } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: ProjectSummary;
@@ -34,7 +35,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
       <div className={`relative ${imageHeight} w-full overflow-hidden bg-surface-2`}>
         {project.image ? (
           <img
-            src={project.image}
+            src={resolveUploadUrl(project.image) ?? undefined}
             alt={project.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             loading="lazy"

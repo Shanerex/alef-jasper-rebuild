@@ -10,6 +10,7 @@ import com.alef.api.portfolio.error.ProjectNotFoundException;
 import com.alef.api.portfolio.service.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,8 +29,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Verifies the REST contract (status codes, JSON shape, error handling)
  * with a mocked service layer. Does not test DB integration -- that is
  * covered by the service tests and the full-stack docker compose flow.
+ *
+ * addFilters = false (feature 012): see OfficeControllerTest's class doc --
+ * spring-boot-starter-security now auto-secures every @WebMvcTest slice
+ * unless told otherwise; these endpoints stay public under the real
+ * AdminSecurityConfig chain (proven by AdminSecurityWebTest), so filters are
+ * disabled here to keep testing only this class's original concern.
  */
 @WebMvcTest({ProjectController.class, PortfolioExceptionHandler.class})
+@AutoConfigureMockMvc(addFilters = false)
 class ProjectControllerTest {
 
     @Autowired

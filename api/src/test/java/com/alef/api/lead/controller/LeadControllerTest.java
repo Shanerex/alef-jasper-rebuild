@@ -5,6 +5,7 @@ import com.alef.api.lead.error.LeadExceptionHandler;
 import com.alef.api.lead.service.LeadService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,8 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * Both LeadController and LeadExceptionHandler are loaded so the advice chain
  * is exercised, mirroring the portfolio controller test pattern.
+ *
+ * addFilters = false (feature 012): see OfficeControllerTest's class doc --
+ * POST /api/leads stays public/unauthenticated under the real
+ * AdminSecurityConfig chain (it is outside /api/admin/**); CSRF also does not
+ * apply to it for the same reason (CSRF only guards /api/admin/** mutations).
  */
 @WebMvcTest({LeadController.class, LeadExceptionHandler.class})
+@AutoConfigureMockMvc(addFilters = false)
 class LeadControllerTest {
 
     @Autowired
