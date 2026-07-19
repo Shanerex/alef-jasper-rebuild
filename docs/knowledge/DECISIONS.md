@@ -2,6 +2,12 @@
 
 > Append-only. Newest first. Why a choice was made, not just what.
 
+## DEC-021: Light theme approved as a design-system extension; dark remains the brand default (2026-07-19)
+- Context: Feature 014 (theme toggle) requests a dark/light toggle at the top-right with a polished transition. `DESIGN_SYSTEM.md` is explicitly dark-first ("Not a light/white theme") and defines no light palette, so the business handoff flagged the conflict as requiring human approval.
+- Decision: The owner reviewed the conflict and approved a light theme for the site (2026-07-19). A light palette must be defined as a human-reviewed extension of `DESIGN_SYSTEM.md` before 014's design/implementation phases; the "Dark Prestige" direction stays the canonical brand expression and the dark palette remains the reference for all new components.
+- Why: Readability preference and bright-daylight office viewing in the GCC justify a light option, but brand equity lives in the dark presentation — so light mode is an alternate rendering of the same system (navy/gold/serif language preserved), not a second brand.
+- Consequences: `DESIGN_SYSTEM.md` gains a light-palette section (token-for-token mapping of backgrounds, surfaces, text, gold treatment) subject to owner sign-off. 014 is unblocked for /orchestrate once that section lands. Gold-on-light contrast must meet accessibility budgets (treated as correctness per ARCHITECTURE.md).
+
 ## DEC-020: Team table designed for admin CRUD from day one; `active` soft-hide; 10 profiles; "Cadding" confirmed (2026-07-01)
 - Context: F011 requires the leadership team to be admin-manageable (012) and expanding — new profiles must be addable without a code change or migration. The prequalification doc lists 10 profiles (not 8). "Cadding" in the company name was flagged as a possible typo.
 - Decision: `team` table carries `display_order` (reorder without a migration), `active` (retire/stage a profile without a delete or migration), and audit timestamps from the start so 012 adds write endpoints with zero schema churn. 011 ships only `GET /api/team` (active rows, ordered). Adding a profile is a single `INSERT`. "Cadding" is the legal name on the Dubai DED trade license — it is NOT a typo and must never be auto-corrected.
