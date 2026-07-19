@@ -21,6 +21,15 @@ public interface ProjectRepository
     /** Finds a project by its public slug key (F3-AC2). */
     Optional<ProjectEntity> findBySlug(String slug);
 
+    /** Checks slug uniqueness on admin create (F12-AC4, design §A.2). */
+    boolean existsBySlug(String slug);
+
+    /**
+     * Checks slug uniqueness on admin update, excluding the row being updated
+     * (design §A.2: "on PUT, uniqueness excludes the row itself").
+     */
+    boolean existsBySlugAndIdNot(String slug, Long id);
+
     /**
      * Returns the distinct country values present in the data, ordered alphabetically.
      * Used by the /filters endpoint (architecture 3.3) -- countries are data-derived,

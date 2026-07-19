@@ -22,4 +22,10 @@ public interface TeamRepository extends JpaRepository<TeamEntity, Long> {
      * redeploy or code change — the DEC-020 requirement made literal.
      */
     List<TeamEntity> findAllByActiveTrueOrderByDisplayOrderAsc();
+
+    /**
+     * Returns all team profiles (including inactive) ordered for the admin list
+     * (design §A.3: "All rows including active=false").
+     */
+    List<TeamEntity> findAllByOrderByDisplayOrderAsc();
 }
