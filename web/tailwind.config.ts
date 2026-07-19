@@ -34,6 +34,21 @@ const config: Config = {
           ghost: "rgba(196,151,58,0.08)",
         },
 
+        /*
+         * Danger/destructive accent -- added post-QA (handoffs/5-qa-to-dev.md
+         * Concern #4, feature 012 bug-fix pass) so DeleteConfirmDialog's
+         * confirm button can be "outline/red-tinted, not primary gold" per
+         * design.md §B.6, via a named token rather than raw hex (F12-AC30).
+         * A single muted, desaturated red kept deliberately close in tone to
+         * the rest of the Dark Prestige palette (not a bright alert red) --
+         * DESIGN_SYSTEM.md defines no red anywhere, so this is a minimal,
+         * additive introduction, not a reinterpretation of an existing token.
+         */
+        danger: {
+          DEFAULT: "#B5453B",
+          subtle: "rgba(181,69,59,0.25)",
+        },
+
         /* Text Colors */
         "text-primary": "#E8E0D0",
         "text-secondary": "#C8C0B0",

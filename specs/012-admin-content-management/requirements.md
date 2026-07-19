@@ -4,12 +4,16 @@ spec_id: "012"
 phase: requirements
 owner: PM
 status: approved
-version: "1.0"
+version: "1.1"
 entry_criteria:
   - business rationale captured in handoffs/1-business-to-pm.md
+  - v1.0 approved and carried into a draft architecture (architecture.md v0.1)
+  - human stakeholder reviewed the draft architecture and directed two scope changes (see DEC note in handoff 3-pm-to-architect.md)
 exit_criteria:
-  - acceptance criteria are testable and id'd; architect can design from this
+  - acceptance criteria are testable and id'd; architect can amend architecture.md/design.md from this
 ---
+
+> **Feature closed 2026-07-19.** All 30 F12-AC1..30 confirmed PASS by id (testing.md v1.5, QA handoffs/14-qa-to-pm.md). Definition of Done confirmed by PM. See handoffs/15-pm-close.md for the formal close decision. This requirements.md stays `approved`/v1.1 — no acceptance criteria changed at close; this note is a status pointer only, per this repo's convention of tracking feature-level done-ness in CLAUDE.md's spec table rather than renumbering or re-versioning a shipped requirements doc.
 
 # Requirements: Admin Content Management
 
@@ -22,6 +26,8 @@ This is an internal admin portal for ALEF staff. It is explicitly distinct from 
 ## User stories
 
 - As an ALEF admin, I can log in to a protected admin area so that only authorized staff can modify site content.
+- As an ALEF admin, I can use the admin console comfortably from my phone or tablet as well as my desktop, so that I can manage content wherever I'm working.
+- As an ALEF admin, I can change my own password from within the admin UI, using my current password, so that I can maintain account security without needing a developer to redeploy.
 - As an ALEF admin, I can add, edit, or delete a project and see the change reflected on the live public site without a code change or redeploy.
 - As an ALEF admin, I can upload project images through the admin interface so that projects display correctly on the public site.
 - As an ALEF admin, I can add, edit, or delete a team member (including their photo) so that the About/team section stays current.
@@ -36,6 +42,11 @@ This is an internal admin portal for ALEF staff. It is explicitly distinct from 
 - [ ] F12-AC1 The admin surface is only accessible after successful authentication. Unauthenticated requests to admin pages are redirected to a login screen.
 - [ ] F12-AC2 Unauthenticated requests to content-mutating API endpoints are rejected with an appropriate error (not silently ignored).
 - [ ] F12-AC3 The authentication mechanism is standalone and admin-only. It does not depend on or presuppose the per-client auth that feature 006 will introduce later.
+
+### Account Security
+
+- [ ] F12-AC28 An admin can change their own password from within the admin UI without a code change or redeploy. The change requires supplying the current password and takes effect on next login.
+- [ ] F12-AC29 The admin credential is stored only as a one-way BCrypt hash, seeded from environment configuration on first boot and persisted thereafter (so it can change at runtime). Plaintext passwords are never stored or logged. (This keeps local-first/F12-AC26 intact: the initial secret lives in env, never in the repo.)
 
 ### Projects CRUD
 
@@ -86,12 +97,14 @@ This is an internal admin portal for ALEF staff. It is explicitly distinct from 
 
 ### Admin UI
 
-- [ ] F12-AC27 The admin UI is functional on desktop browsers. Mobile-friendly layout is a nice-to-have and is not required for v1.
+- [ ] F12-AC27 The admin UI is fully responsive and usable on phone and tablet as well as desktop: lists, forms, and the upload flow all work correctly at mobile widths, not just desktop. This is required for v1 (ALEF staff use desktop and mobile roughly equally).
+- [ ] F12-AC30 The admin UI is built on themeable design tokens with no hard-coded colors, so the forthcoming light/dark theme toggle (spec 013) can be applied without rework.
 
 ## Out of scope
 
 - **Per-client authentication and the client-facing portal.** Feature 006 owns external/client auth and submittal tracking. Feature 012 is internal/admin only.
-- **Role hierarchies or multi-admin permissions.** v1 supports a single admin role. Granular roles (editor, viewer, super-admin) are deferred.
+- **Role hierarchies, multiple admin accounts, and fully-forgotten-password self-service reset.** v1 supports a single admin role and a single admin credential. Granular roles (editor, viewer, super-admin) and multiple simultaneous admin accounts are deferred to **v2**. In v1 the single admin can change a *known* password in-app (F12-AC28); a self-service flow for recovering a *fully forgotten* password (e.g., an emailed reset link) is also deferred to **v2** — v1 has no email infrastructure, so if the admin forgets their password entirely, restoring access remains an ops-level action (rotating the seed credential via environment configuration). This limitation is accepted for v1.
+- **The light/dark theme toggle itself.** The toggle is owned by spec 013, staged as a separate feature shipping in v1 alongside 012. Feature 012 commits only to building the admin UI on themeable design tokens (F12-AC30) so 013 can layer the toggle on without rework.
 - **Audit trail.** Tracking who changed what and when is noted as a possible later iteration but is not required for v1.
 - **Bilingual EN/AR editing.** Feature 008 owns the localization model. In v1, the admin edits canonical content only. Bilingual content editing is deferred until 008's localization approach is defined.
 - **Approval or publishing workflows.** Edits go live directly; there is no draft/review/publish pipeline in v1.
@@ -99,5 +112,6 @@ This is an internal admin portal for ALEF staff. It is explicitly distinct from 
 
 ## Open Questions
 
-1. **Trust stats storage model.** Trust-layer stats (years in business, staff count, capacity) and badges are not part of the data model in ARCHITECTURE.md today. Whether they live in a Postgres table, a config record, or another mechanism is an architecture decision for the Architect.
-2. **Audit trail timing.** Deferred from v1, but the business may want it before multiple admins are onboarded. Flag for revisit after v1 ships.
+1. **Trust stats storage model.** Resolved at the architecture gate: `trust_content` table (DEC-013/DEC-025). No longer open.
+2. **Audit trail timing.** Still deferred from v1 (out of scope, above). The business may want it before multiple admins are onboarded — flag for revisit alongside the v2 multi-admin decision. Not a blocker for this feature's v1 close.
+3. **Password-reset mechanism.** Resolved for this revision: v1 stays single-admin, with in-app change of a *known* password (F12-AC28, DEC-021); full self-service recovery of a *forgotten* password is explicitly deferred to v2. No acceptance criterion in this revision assumed an external schema — how the credential is persisted at runtime was resolved by the Architect (F12-AC29, DEC-021). No longer open.

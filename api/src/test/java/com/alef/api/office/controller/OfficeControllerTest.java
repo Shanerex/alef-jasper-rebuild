@@ -5,6 +5,7 @@ import com.alef.api.office.dto.OfficesDto;
 import com.alef.api.office.service.OfficeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,8 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * Verifies status code, JSON envelope shape, and array fields (phones,
  * addressLines) with a mocked service layer.
+ *
+ * addFilters = false (feature 012): spring-boot-starter-security is now on
+ * the classpath, so @WebMvcTest auto-applies a default "secure everything"
+ * filter chain unless told otherwise. This endpoint is public and unauthenticated
+ * both before and after 012 (AdminSecurityConfig only locks down /api/admin/**,
+ * proven by AdminSecurityWebTest's public-endpoint-stays-open test against the
+ * real chain) -- disabling filters here keeps this class testing what it always
+ * tested: the HTTP contract, not auth.
  */
 @WebMvcTest(OfficeController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class OfficeControllerTest {
 
     @Autowired
