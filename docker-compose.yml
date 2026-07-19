@@ -25,6 +25,15 @@ services:
       SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
       SPRING_AI_OLLAMA_CHAT_MODEL: llama3.2
       SPRING_AI_OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+      # Admin console (feature 012). First-boot seed only — the persisted admin_credential
+      # row is authoritative after that; changing these env vars does not affect an
+      # already-seeded credential. Dev-only default password below: "changeme123".
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD_HASH: "$2y$10$1JbD28taAcYb9GQB5s9Lp.gJc19Z4l94VyZJXSAH79XgqWoUbeQze"
+      WEB_ORIGIN: http://localhost:3000
+      ALEF_UPLOAD_DIR: /var/alef/uploads
+    volumes:
+      - alef-uploads:/var/alef/uploads
     depends_on:
       postgres:
         condition: service_healthy
@@ -75,3 +84,6 @@ services:
     ports: ["11434:11434"]
     volumes:
       - ./infra/ollama_models:/root/.ollama
+
+volumes:
+  alef-uploads:

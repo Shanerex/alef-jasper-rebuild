@@ -61,10 +61,34 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- Security (feature 012, DEC-021): Spring Security for the /api/admin/** auth
+             layer. BCryptPasswordEncoder ships with this starter, so no extra dependency
+             is needed for password hashing (architecture §7). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Redis-backed sessions for the admin console (feature 012, DEC-021): sessions
+             survive an api restart and keep a horizontal-scale door open. -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
         <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring Security test support (MockMvc csrf()/user() request post processors).
+             Not called out explicitly in architecture.md/design.md, but required to
+             exercise the CSRF/session filter chain in WebMvcTest; documented as
+             DEC-027 in DECISIONS.md. -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

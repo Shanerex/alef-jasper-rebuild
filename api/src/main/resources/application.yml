@@ -20,14 +20,46 @@ spring:
     enabled: true
     locations: classpath:db/migration
 
-  # Redis (per-IP rate limiting on POST /api/leads, architecture §10 Decision 2)
+  # Redis (per-IP rate limiting on POST /api/leads, architecture §10 Decision 2;
+  # also the admin session store below, feature 012 DEC-021)
   data:
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
       port: ${SPRING_REDIS_PORT:6379}
 
+  # Admin sessions are stored in Redis (architecture §2.1, DEC-021 amended) so they
+  # survive an api restart and keep a horizontal-scale door open (constraint 7).
+  session:
+    store-type: redis
+
+  # Multipart upload caps (architecture §2.4, design §A.6): 25 MB covers the largest
+  # category (sample-file PDFs); UploadService re-checks the tighter per-category
+  # limit (images 5 MB) on top of this coarse first-line gate.
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 26MB
+
 server:
   port: 8080
+  servlet:
+    session:
+      cookie:
+        # Admin session cookie name (architecture §2.1, design §A.1).
+        name: ALEFADMIN
+        http-only: true
+        same-site: lax
+
+# Admin console env-driven config (feature 012, architecture §6).
+# username/password-hash are FIRST-BOOT SEED values only (DEC-021 amended) --
+# read once by AdminCredentialSeeder; the persisted admin_credential row is
+# authoritative thereafter and is never overwritten by these on a later boot.
+alef:
+  admin:
+    username: ${ADMIN_USERNAME:#{null}}
+    password-hash: ${ADMIN_PASSWORD_HASH:#{null}}
+  web-origin: ${WEB_ORIGIN:http://localhost:3000}
+  upload-dir: ${ALEF_UPLOAD_DIR:/var/alef/uploads}
 
 ---
 # API profile: serves the REST endpoints and (later) the concierge.

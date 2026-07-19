@@ -21,4 +21,13 @@ public interface TrustContentRepository extends JpaRepository<TrustContentEntity
      * The ordering ensures F012 can reorder items without a schema change.
      */
     List<TrustContentEntity> findByItemTypeOrderByDisplayOrderAsc(String itemType);
+
+    /** Checks item_key uniqueness on admin create (F12-AC12..AC15, design §A.4). */
+    boolean existsByItemKey(String itemKey);
+
+    /** Checks item_key uniqueness on admin update, excluding the row being updated. */
+    boolean existsByItemKeyAndIdNot(String itemKey, Long id);
+
+    /** Returns all rows ordered by display_order, for the admin's full grouped view. */
+    List<TrustContentEntity> findAllByOrderByDisplayOrderAsc();
 }
